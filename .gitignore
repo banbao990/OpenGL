@@ -1,1 +1,8 @@
-Demo/Demo01/*
+Demo/Demo01/Demo01/*
+Demo/Demo01/Debug/*
+Demo/Demo01/.vs/*
+Demo/Demo01/Demo01.sln
+
+!/Demo/Demo01/Demo01/Demo01.vcxproj
+!/Demo/Demo01/Demo01/Demo01.vcxproj.filters
+!/Demo/Demo01/Demo01/Demo01.vcxproj.user
