@@ -1,0 +1,4 @@
+OpenGL实现厂商的名字：NVIDIA Corporation
+渲染器标识符：GeForce GTX 1050/PCIe/SSE2
+OpenGL实现的版本号：4.6.0 NVIDIA 457.09
+OGLU工具库版本：1.2.2.0 Microsoft Corporation
