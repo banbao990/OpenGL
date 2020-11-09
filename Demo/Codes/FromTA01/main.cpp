@@ -14,7 +14,7 @@
 #include <GL/glut.h>
 
 // 是否用 shader 进行绘制
-bool g_useShader = false;
+bool g_useShader = true;
 
 const float cubeVertices[8][3] = {
     { -1, -1, -1 },
