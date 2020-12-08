@@ -182,7 +182,7 @@ int main(int argc, char *argv[]) {
             // float)glfwGetTime() * 
             // glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
         // matrix view 注意, 我们将矩阵向我们要进行移动场景的反方向移动
-        // 这个问题很容易解释, 当前视点为(0,0,0), 如果要将视点移动到(x1,y1,z1)
+        // 这个问题很容易解释, 当前视点为(x,y,z), 如果要将视点移动到(x1,y1,z1)
         // 那么当前坐标系相对于新视点的坐标就变成了(x-x1,y-y1,z-z1)
         // 即做变换(-x1,-y1,-z1)
         glm::mat4 view = glm::mat4(1.0f);
