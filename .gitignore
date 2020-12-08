@@ -2,7 +2,10 @@ Demo/Demo/Demo/*
 Demo/Demo/Debug/*
 Demo/Demo/.vs/*
 Demo/Demo/Demo.sln
+Demo/Codes/**/*.exe
 
 !/Demo/Demo/Demo/Demo.vcxproj
 !/Demo/Demo/Demo/Demo.vcxproj.filters
 !/Demo/Demo/Demo/Demo.vcxproj.user
+
+utils/*

@@ -22,4 +22,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="01.frag">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="01.vert">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="light.vert">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="light.frag">
+      <Filter>源文件</Filter>
+    </None>
+  </ItemGroup>
 </Project>
