@@ -140,6 +140,8 @@
   <ItemGroup>
     <None Include="01.frag" />
     <None Include="01.vert" />
+    <None Include="1.model_loading.frag" />
+    <None Include="1.model_loading.vert" />
     <None Include="light.frag" />
     <None Include="light.vert" />
   </ItemGroup>

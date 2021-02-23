@@ -1,3 +1,4 @@
+/* learnopengl 自定义的 mesh 类(网格) */
 #ifndef MESH_H
 #define MESH_H
 
@@ -12,12 +13,13 @@
 #include <vector>
 using namespace std;
 
+// 顶点结构体
 struct Vertex {
-    // position
+    // position 位置
     glm::vec3 Position;
-    // normal
+    // normal 法向
     glm::vec3 Normal;
-    // texCoords
+    // texCoords 纹理坐标索引
     glm::vec2 TexCoords;
     // tangent
     glm::vec3 Tangent;
@@ -25,21 +27,23 @@ struct Vertex {
     glm::vec3 Bitangent;
 };
 
+// 纹理结构体
 struct Texture {
-    unsigned int id;
-    string type;
+    unsigned int id; 
+    string type; // 用于识别是漫发射贴图还是镜面光贴图
     string path;
 };
 
+// 网格类
 class Mesh {
 public:
-    // mesh Data
-    vector<Vertex>       vertices;
-    vector<unsigned int> indices;
-    vector<Texture>      textures;
-    unsigned int VAO;
+    // mesh Data 网格数据
+    vector<Vertex>       vertices; // 结点
+    vector<unsigned int> indices;  // 结点数据索引
+    vector<Texture>      textures; // 纹理
+    unsigned int VAO; // 渲染数据
 
-    // constructor
+    // constructor 构造函数
     Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures) {
         this->vertices = vertices;
         this->indices = indices;
@@ -49,25 +53,28 @@ public:
         setupMesh();
     }
 
-    // render the mesh
+    // render the mesh 渲染
     void Draw(Shader &shader) {
         // bind appropriate textures
-        unsigned int diffuseNr  = 1;
+        unsigned int diffuseNr = 1;
         unsigned int specularNr = 1;
-        unsigned int normalNr   = 1;
-        unsigned int heightNr   = 1;
-        for(unsigned int i = 0; i < textures.size(); i++) {
-            glActiveTexture(GL_TEXTURE0 + i); // active proper texture unit before binding
-            // retrieve texture number (the N in diffuse_textureN)
+        unsigned int normalNr = 1;
+        unsigned int heightNr = 1;
+        for (unsigned int i = 0; i < textures.size(); i++) {
+            // active proper texture unit before binding
+            // 在绑定之前激活相应的纹理单元
+            glActiveTexture(GL_TEXTURE0 + i); 
+            // 为所有的纹理规定一个命名规则(texture_diffuse1, ..., texture_diffuseN)
+            // retrieve texture number (the N in texture_diffuseN)
             string number;
             string name = textures[i].type;
-            if(name == "texture_diffuse")
+            if (name == "texture_diffuse")
                 number = std::to_string(diffuseNr++);
-            else if(name == "texture_specular")
+            else if (name == "texture_specular")
                 number = std::to_string(specularNr++); // transfer unsigned int to stream
-            else if(name == "texture_normal")
+            else if (name == "texture_normal")
                 number = std::to_string(normalNr++); // transfer unsigned int to stream
-            else if(name == "texture_height")
+            else if (name == "texture_height")
                 number = std::to_string(heightNr++); // transfer unsigned int to stream
 
             // now set the sampler to the correct texture unit
@@ -76,7 +83,7 @@ public:
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }
 
-        // draw mesh
+        // draw mesh 绘制网格
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
@@ -86,7 +93,7 @@ public:
     }
 
 private:
-    // render data
+    // render data 渲染数据
     unsigned int VBO, EBO;
 
     // initializes all the buffer objects/arrays
@@ -107,6 +114,8 @@ private:
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
 
+        // 一些技巧:
+        // offsetof(Vertex, Normal) 返回结构体 Vertex 中的变量 Normal 的偏移量
         // set the vertex attribute pointers
         // vertex Positions
         glEnableVertexAttribArray(0);

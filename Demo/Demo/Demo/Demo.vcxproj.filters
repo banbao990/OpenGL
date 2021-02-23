@@ -35,5 +35,11 @@
     <None Include="light.frag">
       <Filter>源文件</Filter>
     </None>
+    <None Include="1.model_loading.vert">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="1.model_loading.frag">
+      <Filter>源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
