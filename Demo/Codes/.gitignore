@@ -3,3 +3,4 @@ learnopengl/*
 !learnopengl/01-GetStarted
 !learnopengl/02-Lighting
 !learnopengl/03-ModelLoading
+!learnopengl/04-AdvancedOpenGL
