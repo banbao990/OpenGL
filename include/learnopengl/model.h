@@ -62,6 +62,10 @@ private:
         // aiProcess_OptimizeMeshes: 它会将多个小网格拼接为一个大的网格，减少绘制调用从而进行优化
         // aiProcess_CalcTangentSpace: Calculates the tangents and bitangents for the imported meshes
         Assimp::Importer importer;
+        // Assimp有个很有用的配置, 在我们加载模型的时候调用aiProcess_CalcTangentSpace
+        // 当aiProcess_CalcTangentSpace应用到Assimp的ReadFile函数时
+        // Assimp会为每个加载的顶点计算出柔和的切线和副切线向量
+        // 它所使用的方法和我们本教程使用的类似
         const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
         // check for errors(if is Not Zero) 检查模型读取是否出错
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
@@ -172,14 +176,17 @@ private:
         vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
         textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
         // 3. normal maps
-        std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
+        // wavefront的模型格式(.obj)导出的法线贴图有点不一样
+        // Assimp的aiTextureType_NORMAL并不会加载它的法线贴图
+        // 而aiTextureType_HEIGHT却能, 所以我们经常这样加载它们
+        std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
         textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
         // 4. height maps
-        std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_height");
+        std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
         textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
-        // 5.ambient maps
-        std::vector<Texture> reflectionMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_ambient");
-        textures.insert(textures.end(), reflectionMaps.begin(), reflectionMaps.end());
+        
+        // return a mesh object created from the extracted mesh data
+        return Mesh(vertices, indices, textures);
 
         // return a mesh object created from the extracted mesh data
         return Mesh(vertices, indices, textures);
