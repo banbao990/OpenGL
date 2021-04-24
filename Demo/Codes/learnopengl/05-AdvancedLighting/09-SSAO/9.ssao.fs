@@ -41,6 +41,24 @@ void main() {
     for(int i = 0; i < kernelSize; ++i) {
         // get sample position
         // 切线空间变换到观察坐标系空间
+        
+        // 因为 OpenGL 是列式存储, 列式计算的
+        // 二维坐标的齐次坐标经过如下变换
+        //   mat3(1,0,0,0,1,0,1,0,1)
+        //     =>
+        //      1,0,1     
+        //      0,1,0     
+        //      0,0,1     
+        //   效果是向 x 方向平移了 1 个单位长度
+        // 这里的 TBN 左乘等价于我们使用矩阵的 TBN^T 左乘
+        //   而正交矩阵 TBN^T = TBN^-1
+        //   所以这是正确的
+        // uvn 坐标系的三个单位向量在 xyz 坐标系中表示为 (ux,uy,uz)...
+        // 从 xyz 到 uvn 的正交变换为
+        //      ux,uy,uz
+        //      vx,vy,vz
+        //      nx,ny,nz
+        
         vec3 samplePos = TBN * samples[i]; 
         samplePos = fragPos + samplePos * radius; 
         
