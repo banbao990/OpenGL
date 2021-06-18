@@ -12,6 +12,23 @@
 
 ## 2. 问题
 
+### (0) 运行报错
+
++ 可能是 OpenGL 中版本问题
++ `main()` 函数中版本修改为 3.3
+
+```c
+glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+```
+
+```c
+glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+```
+
+
+
 ### (1) 缺少配置 dll 文件
 
 + 将目录下的 `dll` 文件夹加入环境变量 `PATH`
