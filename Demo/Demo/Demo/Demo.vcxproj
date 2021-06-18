@@ -137,6 +137,25 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="global.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Demo.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\BlinnPhong.frag" />
+    <None Include="shaders\BlinnPhong.vert" />
+    <None Include="shaders\BlinnPhong_perspective.frag" />
+    <None Include="shaders\genSM.frag" />
+    <None Include="shaders\genSM.vert" />
+    <None Include="shaders\genSM_perspective.frag" />
+    <None Include="shaders\gen_d_d2.frag" />
+    <None Include="shaders\gen_d_d2.vert" />
+    <None Include="shaders\light.frag" />
+    <None Include="shaders\light.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
